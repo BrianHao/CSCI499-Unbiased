@@ -4,25 +4,11 @@ import './index.css';
 
 /* GrapheneDB Setup */
 var neo4j = require('neo4j-driver').v1;
-var graphenedbURL = process.env.GRAPHENEDB_BOLT_URL;
-var graphenedbUser = process.env.GRAPHENEDB_BOLT_USER;
-var graphenedbPass = process.env.GRAPHENEDB_BOLT_PASSWORD;
+var graphenedbURL = process.env.REACT_APP_GRAPHENEDB_BOLT_URL;
+var graphenedbUser = process.env.REACT_APP_GRAPHENEDB_BOLT_USER;
+var graphenedbPass = process.env.REACT_APP_GRAPHENEDB_BOLT_PASSWORD;
 var driver = neo4j.driver(graphenedbURL, neo4j.auth.basic(graphenedbUser, graphenedbPass));
-var session = driver.session();
 
-var session = driver.session();
-session
-    .run("CREATE (n {hello: 'World'}) RETURN n.name")
-    .then(function(result) {
-        result.records.forEach(function(record) {
-            console.log(record)
-        });
-
-        session.close();
-    })
-    .catch(function(error) {
-        console.log(error);
-    });
 
 function Article(props) {
   return (
@@ -106,7 +92,8 @@ class SiteContent extends React.Component {
       <div className="site-content">
         <div className="nav-bar">
           <div className="version">
-          Version: 0.01
+          {graphenedbURL + " " + graphenedbUser + " " + graphenedbPass }
+          Version: 0.02
           </div>
           <div className="navDisplayType">
             Show:{' '}
