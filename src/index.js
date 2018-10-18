@@ -105,6 +105,9 @@ class SiteContent extends React.Component {
     return (
       <div className="site-content">
         <div className="nav-bar">
+          <div className="version">
+          Version: 0.01
+          </div>
           <div className="navDisplayType">
             Show:{' '}
             <button onClick={() => {this.setState({queryType: "everything"}); this.getArticles();}}>All News</button>
