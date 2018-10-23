@@ -9,6 +9,7 @@ var graphenedbUser = process.env.REACT_APP_GRAPHENEDB_BOLT_USER;
 var graphenedbPass = process.env.REACT_APP_GRAPHENEDB_BOLT_PASSWORD;
 var driver = neo4j.driver(graphenedbURL, neo4j.auth.basic(graphenedbUser, graphenedbPass));
 
+var session = driver.session();
 
 function Article(props) {
   return (
@@ -88,12 +89,24 @@ class SiteContent extends React.Component {
         );
     }
 
+    session
+    .run("CREATE (n {hello: 'World'}) RETURN n.name")
+    .then(function(result) {
+        result.records.forEach(function(record) {
+            console.log(record)
+        });
+
+        session.close();
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+
     return (
       <div className="site-content">
         <div className="nav-bar">
           <div className="version">
-          {graphenedbURL + " " + graphenedbUser + " " + graphenedbPass }
-          Version: 0.02
+          Version: 0.03
           </div>
           <div className="navDisplayType">
             Show:{' '}
