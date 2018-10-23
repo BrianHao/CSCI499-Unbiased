@@ -2,14 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-/* GrapheneDB Setup */
+/* GrapheneDB Bolt Setup */
 var neo4j = require('neo4j-driver').v1;
 var graphenedbURL = process.env.REACT_APP_GRAPHENEDB_BOLT_URL;
 var graphenedbUser = process.env.REACT_APP_GRAPHENEDB_BOLT_USER;
 var graphenedbPass = process.env.REACT_APP_GRAPHENEDB_BOLT_PASSWORD;
 var driver = neo4j.driver(graphenedbURL, neo4j.auth.basic(graphenedbUser, graphenedbPass));
 
-var session = driver.session();
+
+/* GrapheneDB Seraph Setup
+var url = require('url').parse(process.env.REACT_APP_GRAPHENEDB_URL)
+
+
+var db = require("seraph")({
+  server: url.protocol + '//' + url.host,
+  user: url.auth.split(':')[0],
+  pass: url.auth.split(':')[1]
+});
+*/
 
 function Article(props) {
   return (
@@ -52,9 +62,9 @@ class SiteContent extends React.Component {
       let url = "https://newsapi.org/v2/" + this.state.queryType + "?sources="
                   + this.state.querySource + "&apiKey=" + this.state.apiKey;
 
-      console.log("response.status");
       fetch(url)
         .then((response) => {
+          //console.log(response.status);
           if (response.status === 200) {
             return response.json();
           } else {
@@ -69,6 +79,24 @@ class SiteContent extends React.Component {
           console.log(error);
           this.setState({returnedJsonArticles: []});
         });
+
+    var session = driver.session();
+    console.log("start session")
+session
+    .run("CREATE (n {hello: 'World'}) RETURN n.name")
+    .then(function(result) {
+        result.records.forEach(function(record) {
+          console.log("create success")
+            console.log(record)
+        });
+
+        session.close();
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+
+
     }
 
   render() {
@@ -88,19 +116,6 @@ class SiteContent extends React.Component {
           />
         );
     }
-
-    session
-    .run("CREATE (n {hello: 'World'}) RETURN n.name")
-    .then(function(result) {
-        result.records.forEach(function(record) {
-            console.log(record)
-        });
-
-        session.close();
-    })
-    .catch(function(error) {
-        console.log(error);
-    });
 
     return (
       <div className="site-content">
