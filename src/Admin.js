@@ -60,12 +60,26 @@ db.query(
   }
 });
 
+//Add date to database if doesn't already exist
+cypherQuery = "MERGE (d:Date {date: {date}})";
+db.query(
+  cypherQuery ,
+  {date: articles[0].publishedAt.substring(0, 10)},
+   function(err, results) {
+  if (err) {
+      console.error('Error saving new node to database:', err);
+  } else {
+    //var result = results[0];
+    //console.log('Node saved to database with id:', result.id);
+  }
+});
+
 //Add news articles to the database
 for(let i =0; i<articles.length; i++) {
   console.log("Neo4j: Attempting to store article #" + i + " of " + articles.length);
 
   cypherQuery = "MERGE (a:Article {title: {title}, author: {author}, description: {description}, "
-                  + "url: {url}, urltoimage: {urltoimage}, publishedat: {publishedat}, content: {content}, source: {source}})";
+                  + "url: {url}, urltoimage: {urltoimage}, publishedat: {publishedat}, shortdate: {shortdate}, content: {content}, source: {source}})";
   db.query(
    cypherQuery,
    {title: articles[i].title === null ? 'N/A': articles[i].title,
@@ -74,6 +88,7 @@ for(let i =0; i<articles.length; i++) {
         url: articles[i].url === null ? 'N/A': articles[i].url,
         urltoimage: articles[i].urlToImage === null ? 'N/A': articles[i].urlToImage,
         publishedat: articles[i].publishedAt === null ? 'N/A': articles[i].publishedAt,
+        shortdate: articles[i].publishedAt === null ? 'N/A': articles[i].publishedAt.substring(0, 10),
         content: articles[i].content=== null ? 'N/A': articles[i].content,
         source: articles[i].source.name || 'N/A'},
     function(err, results) {
@@ -87,6 +102,7 @@ for(let i =0; i<articles.length; i++) {
     }
   });
 
+  // Relate articles to their respective source
   cypherQuery = "MATCH (n:NewsSource {name: {name}}), (a:Article {source: {name}}) MERGE (a)-[:source]-> (n)";
   db.query(
     cypherQuery,
@@ -101,6 +117,23 @@ for(let i =0; i<articles.length; i++) {
       //console.log('Node saved to database with id:', result.id);
     }
   });
+
+  // Relate articles to their respective date
+  cypherQuery = "MATCH (d:Date {date: {date}}), (a:Article {shortdate: {shortdate}}) MERGE (a)-[:dateposted]-> (d)";
+  db.query(
+    cypherQuery,
+    {date: articles[i].publishedAt.substring(0, 10), shortdate: articles[i].publishedAt.substring(0, 10)},
+    function(err, results) {
+    if (err) {
+      console.log("Neo4j: Error matching article #" + i + " of " + articles.length + " to a date.");
+      console.error('Error saving new node to database:', err);
+    } else {
+      //var result = results[0];
+      console.log("Neo4j: Successfully matched article #" + i + " of " + articles.length + " to " + articles[i].publishedAt.substring(0, 10));
+      //console.log('Node saved to database with id:', result.id);
+    }
+  });
+
 }
 
 }
