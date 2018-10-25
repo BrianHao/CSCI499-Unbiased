@@ -1,0 +1,135 @@
+import React from 'react';
+
+/* GrapheneDB Seraph Setup */
+const url = require('url').parse(process.env.REACT_APP_GRAPHENEDB_URL)
+const db = require("seraph")({
+  server: url.protocol + '//' + url.host,
+  user: url.auth.split(':')[0],
+  pass: url.auth.split(':')[1]
+});
+
+const NewsSources = ['the-washington-post','the-new-york-times','bbc-news', 'cnn', 'fox-news', 'abc-news', 'the-wall-street-journal', 'time'];
+
+class Admin extends React.Component {
+/* Gets articles from NewsAPI.org */
+getArticles (){
+  console.log("===== Operation Start =====");
+  for (let i = 0; i<NewsSources.length; i++){
+    this.getArticlesFromSource('top-headlines',NewsSources[i]);
+  }
+  console.log("===== Operation End =====");
+}
+
+/* Gets articles from each individual source in NewsSources */
+getArticlesFromSource (queryType, querySource){
+  //console.log("NewsAPI: Attempting to get " + queryType + " from " + querySource + ".");
+  const fetch = require('node-fetch');
+  let url ='https://newsapi.org/v2/' + queryType +
+          '?sources=' + querySource +
+          '&apiKey=e98ef28c9b8b44f4b45618759567ad8d';
+
+  fetch(url)
+    .then((response) => {
+      if(response.status === 200){
+       return response.json();
+     }})
+    .then((jsonResponse) =>{
+      console.log("NewsAPI: Getting " + queryType + " from " + querySource + " success.");
+      this.storeArticles(jsonResponse.articles, queryType);
+    })
+    .catch(function(error){
+      //console.log("NewsAPI: Getting " + queryType + " from " + querySource + " error.");
+      console.log(error);
+    })
+}
+
+/* Stores articles in the neo4j database */
+storeArticles(articles, query){
+
+//Add news source to database if doesn't already exist
+var cypherQuery = "MERGE (n:NewsSource {id: {id}, name: {name}})";
+db.query(
+  cypherQuery,
+  {id: articles[0].source.id, name:articles[0].source.name},
+   function(err, results) {
+  if (err) {
+      console.error('Error saving new node to database:', err);
+  } else {
+    //var result = results[0];
+    //console.log('Node saved to database with id:', result.id);
+  }
+});
+
+//Add news articles to the database
+for(let i =0; i<articles.length; i++) {
+  console.log("Neo4j: Attempting to store article #" + i + " of " + articles.length);
+
+  cypherQuery = "MERGE (a:Article {title: {title}, author: {author}, description: {description}, "
+                  + "url: {url}, urltoimage: {urltoimage}, publishedat: {publishedat}, content: {content}, source: {source}})";
+  db.query(
+   cypherQuery,
+   {title: articles[i].title === null ? 'N/A': articles[i].title,
+        author: articles[i].author=== null ? 'N/A': articles[i].author,
+        description: articles[i].description === null ? 'N/A': articles[i].description,
+        url: articles[i].url === null ? 'N/A': articles[i].url,
+        urltoimage: articles[i].urlToImage === null ? 'N/A': articles[i].urlToImage,
+        publishedat: articles[i].publishedAt === null ? 'N/A': articles[i].publishedAt,
+        content: articles[i].content=== null ? 'N/A': articles[i].content,
+        source: articles[i].source.name || 'N/A'},
+    function(err, results) {
+    if (err) {
+      console.log("Neo4j: Error storing article #" + i + " of " + articles.length);
+      console.error('Error saving new node to database:', err);
+    } else {
+      //var result = results[0];
+      console.log("Neo4j: Successfully stored article #" + i + " of " + articles.length);
+      //console.log('Node saved to database with id:', result.id);
+    }
+  });
+
+  cypherQuery = "MATCH (n:NewsSource {name: {name}}), (a:Article {source: {name}}) MERGE (a)-[:source]-> (n)";
+  db.query(
+    cypherQuery,
+    {name: articles[i].source.name, source: articles[i].source.name},
+    function(err, results) {
+    if (err) {
+      console.log("Neo4j: Error matching article #" + i + " of " + articles.length + " to a source.");
+      console.error('Error saving new node to database:', err);
+    } else {
+      //var result = results[0];
+      console.log("Neo4j: Successfully matched article #" + i + " of " + articles.length + " to " + articles[i].source.name);
+      //console.log('Node saved to database with id:', result.id);
+    }
+  });
+}
+
+}
+
+  render() {
+    return (
+      <div>
+ 	  	 <h2><font color="red">Admin Page</font></h2>
+ 	  	 <h3>NewsAPI.org -> Unbiased neo4j Database</h3>
+       <p>Clicking the following button will pull articles from NewsAPI.org and store them in our neo4j Database.</p>
+ 	  	 <button onClick={() => {this.getArticles();}}>Update Articles</button>
+      </div>
+    );
+  }
+}
+
+export default Admin;
+
+
+/* Sample db code
+
+var cypherQuery = "CREATE (n:Article {title: 'Article Title'}) RETURN n";
+db.query(cypherQuery, function(err, results) {
+  if (err) {
+      console.error('Error saving new node to database:', err);
+  } else {
+    var result = results[0];
+      console.log('Node saved to database with id:', result.id);
+  }
+});
+
+*/

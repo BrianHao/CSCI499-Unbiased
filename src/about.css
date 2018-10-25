@@ -2,8 +2,6 @@ body{
 	padding: 0;
 	margin: 0;
 	background-color: #faf9fe;
-	display: flex;
-  	flex-direction: column;
 }
 
 #site-header{
@@ -27,37 +25,20 @@ body{
 	color: #34333b;
 }
 
-#content-margin-s{
-	margin-left: 60px;
-	margin-right: 60px;
-}
-
-#content-margin-m{
-	margin-left: 60px;
-	margin-right: 60px;
-}
-
-#content{
-	flex: 1 0 auto;
-}
-
 #site-footer{
 	position: fixed;
 	bottom: 0;
 	width: 100%;
 	background: #34333b;
-	padding-left: 5px;
-	padding-right: 5px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-top: #ef3e34 1px solid;
-	flex-shrink: 0;
 }
 
 #site-footer ul{
 	list-style: none;
-	line-height: 2em;	
-	font: 12px Arial, Helvetica, sans-serif;
+	line-height: 1.6em;	
+	font: 8px Arial, Helvetica, sans-serif;
 	margin-left: -5px;
 }
 
