@@ -4,7 +4,12 @@ class Credit extends React.Component {
   render() {
     return (
       <div>
-        <h2>Credit Page</h2>
+        <h1>Credit</h1>
+        <h3>Here are the resources utilized to create this project</h3>
+        <ul>
+        	<li>NewsAPI - https://newsapi.org</li>
+        	<li>more</li>
+        </ul>
       </div>
     );
   }

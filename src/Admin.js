@@ -60,20 +60,6 @@ db.query(
   }
 });
 
-//Add date to database if doesn't already exist
-cypherQuery = "MERGE (d:Date {date: {date}})";
-db.query(
-  cypherQuery ,
-  {date: articles[0].publishedAt.substring(0, 10)},
-   function(err, results) {
-  if (err) {
-      console.error('Error saving new node to database:', err);
-  } else {
-    //var result = results[0];
-    //console.log('Node saved to database with id:', result.id);
-  }
-});
-
 //Add news articles to the database
 for(let i =0; i<articles.length; i++) {
   console.log("Neo4j: Attempting to store article #" + i + " of " + articles.length);
@@ -118,6 +104,20 @@ for(let i =0; i<articles.length; i++) {
     }
   });
 
+    //Add date to database if doesn't already exist
+  cypherQuery = "MERGE (d:Date {date: {date}})";
+  db.query(
+  cypherQuery ,
+  {date: articles[i].publishedAt.substring(0, 10)},
+   function(err, results) {
+  if (err) {
+      console.error('Error saving new node to database:', err);
+  } else {
+    //var result = results[0];
+    //console.log('Node saved to database with id:', result.id);
+  }
+});
+
   // Relate articles to their respective date
   cypherQuery = "MATCH (d:Date {date: {date}}), (a:Article {shortdate: {shortdate}}) MERGE (a)-[:dateposted]-> (d)";
   db.query(
@@ -142,6 +142,7 @@ for(let i =0; i<articles.length; i++) {
     return (
       <div>
  	  	 <h2><font color="red">Admin Page</font></h2>
+       <p><font color="red">This page will be made locked behind a login for admin access only after production release.</font></p>
  	  	 <h3>NewsAPI.org -> Unbiased neo4j Database</h3>
        <p>Clicking the following button will pull articles from NewsAPI.org and store them in our neo4j Database.</p>
  	  	 <button onClick={() => {this.getArticles();}}>Update Articles</button>

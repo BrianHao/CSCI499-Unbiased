@@ -1,13 +1,12 @@
 import React from 'react';
 
-/* GrapheneDB Seraph Setup
+/* GrapheneDB Seraph Setup */
 const url = require('url').parse(process.env.REACT_APP_GRAPHENEDB_URL)
 const db = require("seraph")({
   server: url.protocol + '//' + url.host,
   user: url.auth.split(':')[0],
   pass: url.auth.split(':')[1]
 });
-*/
 
 /* Article Component */
 function Article(props) {
@@ -38,20 +37,19 @@ class Home extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
-      returnedJsonArticles: [],
+      returnedJson: [],
       apiKey: "83bab780be42486da3fe5870a46dfdba",
-      queryType: "everything",
-      querySource: "the-new-york-times",
     };
   }
 
-  getArticles() {
-      let url = "https://newsapi.org/v2/" + this.state.queryType + "?sources="
-                  + this.state.querySource + "&apiKey=" + this.state.apiKey;
+  getArticles(querySource) {
+    var queryType = 'top-headlines';
+      let url = "https://newsapi.org/v2/" + queryType + "?sources="
+                  + querySource + "&apiKey=" + this.state.apiKey;
 
       fetch(url)
         .then((response) => {
-          //console.log(response.status);
+          console.log(response.status);
           if (response.status === 200) {
             return response.json();
           } else {
@@ -59,56 +57,53 @@ class Home extends React.Component {
           }
         })
         .then((jsonData) => {
-          this.setState({returnedJsonArticles: jsonData.articles});
-
-        })
+          console.log(jsonData.articles);
+          this.setState({returnedJson: jsonData.articles});
+        })  
         .catch((error) => {
           console.log(error);
-          this.setState({returnedJsonArticles: []});
         });
-
     }
+
 
 
   render() {
-  	let articlesToDisplay = [];
+    var articlesToDisplay = [];
 
-    for(let i = 0; i < this.state.returnedJsonArticles.length; i++) {
-      articlesToDisplay.push(
+    if (this.state.returnedJson.length === 0) {
+      this.getArticles("the-new-york-times");
+    } else {
+      for(let i = 0; i < this.state.returnedJson.length; i++) {
+        articlesToDisplay.push(
           <Article
-            ArticleSource = {this.state.returnedJsonArticles[i].source.name}
-            ArticleTitle = {this.state.returnedJsonArticles[i].title}
-            ArticleAuthor = {this.state.returnedJsonArticles[i].author}
-            ArticleDescription = {this.state.returnedJsonArticles[i].description}
-            ArticleUrl = {this.state.returnedJsonArticles[i].url}
-            ArticleImageUrl = {this.state.returnedJsonArticles[i].urlToImage}
-            ArticleDatePublished = {this.state.returnedJsonArticles[i].publishedAt}
-            ArticleContent = {this.state.returnedJsonArticles[i].content}
+            ArticleSource = {this.state.returnedJson[i].source.name}
+            ArticleTitle = {this.state.returnedJson[i].title}
+            ArticleAuthor = {this.state.returnedJson[i].author}
+            ArticleDescription = {this.state.returnedJson[i].description}
+            ArticleUrl = {this.state.returnedJson[i].url}
+            ArticleImageUrl = {this.state.returnedJson[i].urlToImage}
+            ArticleDatePublished = {this.state.returnedJson[i].publishedAt}
+            ArticleContent = {this.state.returnedJson[i].content}
           />
         );
+      }
     }
-
+    
     return (
     	<div className="Home-Content">
-    		<div className="navDisplayType">
-            	Show:{' '}
-            	<button onClick={() => {this.setState({queryType: "everything"}); this.getArticles();}}>All News</button>
-            	<button onClick={() => {this.setState({queryType: "top-headlines"}); this.getArticles();}}>Top Headlines</button>
-          	</div>
           	<div className="navDisplaySource">
-            	From:{' '}
-            	<button onClick={() => {this.setState({querySource: "the-new-york-times"}); this.getArticles();}}>The New York Times</button>
-          	 	<button onClick={() => {this.setState({querySource: "bbc-news"}); this.getArticles();}}>BBC News</button>
-            	<button onClick={() => {this.setState({querySource: "cnn"}); this.getArticles();}}>CNN</button>
-            	<button onClick={() => {this.setState({querySource: "fox-news"}); this.getArticles();}}>Fox News</button>
-            	<button onClick={() => {this.setState({querySource: "abc-news"}); this.getArticles();}}>ABC News</button>
-            	<button onClick={() => {this.setState({querySource: "the-wall-street-journal"}); this.getArticles();}}>The Wall Street Journal</button>
-            	<button onClick={() => {this.setState({querySource: "time"}); this.getArticles();}}>Time</button>
-            	<button onClick={() => {this.setState({querySource: "the-washington-post"}); this.getArticles();}}>The Washington Post</button>
+            	<button onClick={() => {this.getArticles("the-new-york-times");}}>The New York Times</button>
+          	 	<button onClick={() => {this.getArticles("bbc-news");}}>BBC News</button>
+            	<button onClick={() => {this.getArticles("cnn");}}>CNN</button>
+            	<button onClick={() => {this.getArticles("fox-news");}}>Fox News</button>
+            	<button onClick={() => {this.getArticles("abc-news");}}>ABC News</button>
+            	<button onClick={() => {this.getArticles("the-wall-street-journal");}}>The Wall Street Journal</button>
+            	<button onClick={() => {this.getArticles("time");}}>Time</button>
+            	<button onClick={() => {this.getArticles("the-washington-post");}}>The Washington Post</button>
           	</div>
 
           	<div className="Articles-Display">
-          	{articlesToDisplay.length > 0 ? articlesToDisplay : <div>No Results</div>}
+          	 {articlesToDisplay.length > 0 ? articlesToDisplay : <div>No Results</div>  }
           	</div>
           <br />
           <br />

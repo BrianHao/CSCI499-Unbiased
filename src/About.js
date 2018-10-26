@@ -4,7 +4,9 @@ class About extends React.Component {
   render() {
     return (
       <div>
-        <h2>About Page</h2>
+        <h1>About</h1>
+        <h2>CUNY Hunter College CSCI-499 Capstone Project</h2>
+        <h4>fsdfdsf</h4>
       </div>
     );
   }
