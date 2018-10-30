@@ -8,7 +8,7 @@ class Credit extends React.Component {
         <h3>Here are the resources utilized to create this project</h3>
         <ul>
         	<li>NewsAPI - https://newsapi.org</li>
-        	<li>more</li>
+        	<li>more...</li>
         </ul>
       </div>
     );

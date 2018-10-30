@@ -1,4 +1,6 @@
 import React from 'react';
+import Dropdown from 'muicss/lib/react/dropdown';
+import DropdownItem from 'muicss/lib/react/dropdown-item';
 
 /* GrapheneDB Seraph Setup */
 const url = require('url').parse(process.env.REACT_APP_GRAPHENEDB_URL)
@@ -20,7 +22,7 @@ function Article(props) {
           </div>
           <div className="panel-body">
             <div className="article-image col-sm-2">
-            <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img>
+            {props.ArticleImageUrl != null ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
             </div>
             <div className="article-info col-sm-10">
               <div>{props.ArticleDatePublished}</div>
@@ -38,51 +40,61 @@ class Home extends React.Component {
     super(props);
     this.state = {
       returnedJson: [],
-      apiKey: "83bab780be42486da3fe5870a46dfdba",
+      displaySource: "Random",
+      displayTimeRange: "Today",
     };
+    this.getArticles = this.getArticles.bind(this);
   }
 
-  getArticles(querySource) {
-    var queryType = 'top-headlines';
-      let url = "https://newsapi.org/v2/" + queryType + "?sources="
-                  + querySource + "&apiKey=" + this.state.apiKey;
+  getArticles(source, type) {
+    let dateQuery = "";
+    let cypherQuery = "";
 
-      fetch(url)
-        .then((response) => {
-          console.log(response.status);
-          if (response.status === 200) {
-            return response.json();
-          } else {
-            throw "Not Found";
-          }
-        })
-        .then((jsonData) => {
-          console.log(jsonData.articles);
-          this.setState({returnedJson: jsonData.articles});
-        })  
-        .catch((error) => {
-          console.log(error);
-        });
+    if (type === "Today") {
+      let tempDate = new Date();
+      let today = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate();
+      dateQuery = "WITH * WHERE a.shortdate = '" + today + "'";
+    }
+
+    if (source === "Random") {
+      cypherQuery = "MATCH (a:Article) WITH * WHERE rand() < 0.10 " + dateQuery + " RETURN a LIMIT 25";
+    } else {
+      cypherQuery = "MATCH (a:Article) WITH * WHERE a.source = '" + source + "' " + dateQuery + " RETURN a LIMIT 25";
+    }
+
+    console.log(cypherQuery);
+
+     db.query(cypherQuery,((err, results) => {
+      if (err) {
+        console.error('Error querying database for articles to display:', err);
+      } else {
+        console.log('Success querying database for articles to display');
+        this.setState({ returnedJson: results });
+      }
+    }));
     }
 
 
 
   render() {
-    var articlesToDisplay = [];
+    let articlesToDisplay = [];
 
     if (this.state.returnedJson.length === 0) {
-      this.getArticles("the-new-york-times");
+      if (!(this.state.displaySource !== "Random" && this.state.displayTimeRange === "Today")) {
+        this.getArticles("Random", "Today");
+      }
     } else {
       for(let i = 0; i < this.state.returnedJson.length; i++) {
         articlesToDisplay.push(
           <Article
-            ArticleSource = {this.state.returnedJson[i].source.name}
+            //key = {this.state.returnedJson[i].title}
+            ArticleSource = {this.state.returnedJson[i].source}
             ArticleTitle = {this.state.returnedJson[i].title}
             ArticleAuthor = {this.state.returnedJson[i].author}
             ArticleDescription = {this.state.returnedJson[i].description}
             ArticleUrl = {this.state.returnedJson[i].url}
-            ArticleImageUrl = {this.state.returnedJson[i].urlToImage}
-            ArticleDatePublished = {this.state.returnedJson[i].publishedAt}
+            ArticleImageUrl = {this.state.returnedJson[i].urltoimage}
+            ArticleDatePublished = {this.state.returnedJson[i].publishedat}
             ArticleContent = {this.state.returnedJson[i].content}
           />
         );
@@ -91,16 +103,30 @@ class Home extends React.Component {
     
     return (
     	<div className="Home-Content">
-          	<div className="navDisplaySource">
-            	<button onClick={() => {this.getArticles("the-new-york-times");}}>The New York Times</button>
-          	 	<button onClick={() => {this.getArticles("bbc-news");}}>BBC News</button>
-            	<button onClick={() => {this.getArticles("cnn");}}>CNN</button>
-            	<button onClick={() => {this.getArticles("fox-news");}}>Fox News</button>
-            	<button onClick={() => {this.getArticles("abc-news");}}>ABC News</button>
-            	<button onClick={() => {this.getArticles("the-wall-street-journal");}}>The Wall Street Journal</button>
-            	<button onClick={() => {this.getArticles("time");}}>Time</button>
-            	<button onClick={() => {this.getArticles("the-washington-post");}}>The Washington Post</button>
-          	</div>
+
+        <div className="navBar">
+          Displaying { }
+          <span>
+            <Dropdown color="default" label={this.state.displaySource}>
+              <DropdownItem onClick={() => { this.setState({ displaySource: "Random"}); this.getArticles("Random", this.state.displayTimeRange); }} >Random</DropdownItem>
+              <DropdownItem onClick={() => { this.setState({ displaySource: "The New York Times"}); this.getArticles("The New York Times", this.state.displayTimeRange); }} >The New York Times</DropdownItem>
+              <DropdownItem onClick={() => { this.setState({ displaySource: "BBC News"}); this.getArticles("BBC News", this.state.displayTimeRange); }} >BBC News</DropdownItem>
+              <DropdownItem onClick={() => { this.setState({ displaySource: "CNN"}); this.getArticles("CNN", this.state.displayTimeRange); }} >CNN</DropdownItem>
+              <DropdownItem onClick={() => { this.setState({ displaySource: "Fox News"}); this.getArticles("Fox News", this.state.displayTimeRange); }} >Fox News</DropdownItem>
+              <DropdownItem onClick={() => { this.setState({ displaySource: "ABC News"}); this.getArticles("ABC News", this.state.displayTimeRange); }} >ABC News</DropdownItem>
+              <DropdownItem onClick={() => { this.setState({ displaySource: "The Wall Street Journal"}); this.getArticles("The Wall Street Journal", this.state.displayTimeRange); }} >The Wall Street Journal</DropdownItem>
+              <DropdownItem onClick={() => { this.setState({ displaySource: "Time"}); this.getArticles("Time", this.state.displayTimeRange); }} >Time</DropdownItem>
+              <DropdownItem onClick={() => { this.setState({ displaySource: "The Washington Post"}); this.getArticles("The Washington Post", this.state.displayTimeRange); }} >The Washington Post</DropdownItem>
+            </Dropdown>
+          </span>
+          { } articles from { }
+          <span>
+            <Dropdown color="default" label={this.state.displayTimeRange}>
+              <DropdownItem onClick={() => { this.setState({ displayTimeRange: "Today"}); this.getArticles(this.state.displaySource, "Today"); }} >Today</DropdownItem>
+              <DropdownItem onClick={() => { this.setState({ displayTimeRange: "This Week"}); this.getArticles(this.state.displaySource, "This Week"); }} >This Week</DropdownItem>
+            </Dropdown>
+          </span>
+        </div>
 
           	<div className="Articles-Display">
           	 {articlesToDisplay.length > 0 ? articlesToDisplay : <div>No Results</div>  }

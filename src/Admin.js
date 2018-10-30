@@ -17,7 +17,6 @@ getArticles (){
   for (let i = 0; i<NewsSources.length; i++){
     this.getArticlesFromSource('top-headlines',NewsSources[i]);
   }
-  console.log("===== Operation End =====");
 }
 
 /* Gets articles from each individual source in NewsSources */
@@ -26,7 +25,7 @@ getArticlesFromSource (queryType, querySource){
   const fetch = require('node-fetch');
   let url ='https://newsapi.org/v2/' + queryType +
           '?sources=' + querySource +
-          '&apiKey=e98ef28c9b8b44f4b45618759567ad8d';
+          '&apiKey=83bab780be42486da3fe5870a46dfdba';
 
   fetch(url)
     .then((response) => {
@@ -142,9 +141,14 @@ for(let i =0; i<articles.length; i++) {
     return (
       <div>
  	  	 <h2><font color="red">Admin Page</font></h2>
-       <p><font color="red">This page will be made locked behind a login for admin access only after production release.</font></p>
+       <p><font color="red">This page will be made locked behind a login for admin access after production release.</font></p>
  	  	 <h3>NewsAPI.org -> Unbiased neo4j Database</h3>
-       <p>Clicking the following button will pull articles from NewsAPI.org and store them in our neo4j Database.</p>
+       <p>Clicking the following button will:</p>
+       <ol>
+       <li>Pull news articles from NewsAPI.org and store them in our neo4j Database</li>
+       <li>Create a relation between each article and its source</li>
+       <li>Create a relation between each article and its posted date in the format yyyy-mm-dd</li>
+       </ol>
  	  	 <button onClick={() => {this.getArticles();}}>Update Articles</button>
       </div>
     );
