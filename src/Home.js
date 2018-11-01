@@ -3,7 +3,7 @@ import Dropdown from 'muicss/lib/react/dropdown';
 import DropdownItem from 'muicss/lib/react/dropdown-item';
 
 /* GrapheneDB Seraph Setup */
-//const url = require('url').parse('https://app112056041-uEamUv:b.36q7DWRcBft0.C0QhkfsLNvmf0vfG@hobby-nohnkjlhjbaagbkedkjmmcbl.dbs.graphenedb.com:24780')
+
 const url = require('url').parse(process.env.REACT_APP_GRAPHENEDB_URL)
 const db = require("seraph")({
   server: url.protocol + '//' + url.host,
@@ -23,7 +23,7 @@ function Article(props) {
           </div>
           <div className="panel-body">
             <div className="article-image col-sm-2">
-            {props.ArticleImageUrl != 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
+            {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
             </div>
             <div className="article-info col-sm-10">
               <div>{props.ArticleDatePublished}</div>
