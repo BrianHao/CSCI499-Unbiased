@@ -23,7 +23,7 @@ function Article(props) {
           </div>
           <div className="panel-body">
             <div className="article-image col-sm-2">
-            {props.ArticleImageUrl != null ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
+            {props.ArticleImageUrl != 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
             </div>
             <div className="article-info col-sm-10">
               <div>{props.ArticleDatePublished}</div>
@@ -86,7 +86,7 @@ class Home extends React.Component {
 
     if (this.state.returnedJson.length === 0) {
       if (!(this.state.displaySource !== "Random" && this.state.displayTimeRange === "Today")) {
-        this.getArticles("Random", "This Week");
+        this.getArticles("Random", "Today");
       }
     } else {
       for(let i = 0; i < this.state.returnedJson.length; i++) {
