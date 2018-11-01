@@ -13,9 +13,9 @@ const NewsSources = ['the-washington-post','the-new-york-times','bbc-news', 'cnn
 class Admin extends React.Component {
 /* Gets articles from NewsAPI.org */
 getArticles (){
-  console.log("===== Operation Start =====");
+  //console.log("===== Operation Start =====");
   for (let i = 0; i<NewsSources.length; i++){
-    this.getArticlesFromSource('top-headlines',NewsSources[i]);
+    this.getArticlesFromSource('everything',NewsSources[i]);
   }
 }
 
