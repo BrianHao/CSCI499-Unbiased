@@ -3,6 +3,7 @@ import Dropdown from 'muicss/lib/react/dropdown';
 import DropdownItem from 'muicss/lib/react/dropdown-item';
 
 /* GrapheneDB Seraph Setup */
+//const url = require('url').parse('https://app112056041-uEamUv:b.36q7DWRcBft0.C0QhkfsLNvmf0vfG@hobby-nohnkjlhjbaagbkedkjmmcbl.dbs.graphenedb.com:24780')
 const url = require('url').parse(process.env.REACT_APP_GRAPHENEDB_URL)
 const db = require("seraph")({
   server: url.protocol + '//' + url.host,
@@ -41,7 +42,7 @@ class Home extends React.Component {
     this.state = {
       returnedJson: [],
       displaySource: "Random",
-      displayTimeRange: "Today",
+      displayTimeRange: "This Week",
     };
     this.getArticles = this.getArticles.bind(this);
   }
@@ -85,7 +86,7 @@ class Home extends React.Component {
 
     if (this.state.returnedJson.length === 0) {
       if (!(this.state.displaySource !== "Random" && this.state.displayTimeRange === "Today")) {
-        this.getArticles("Random", "Today");
+        this.getArticles("Random", "This Week");
       }
     } else {
       for(let i = 0; i < this.state.returnedJson.length; i++) {
