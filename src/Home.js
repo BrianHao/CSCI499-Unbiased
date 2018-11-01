@@ -52,11 +52,12 @@ class Home extends React.Component {
 
     if (type === "Today") {
       let tempDate = new Date();
+    let yy = tempDate.getFullYear();
+    let mm = ((tempDate.getMonth()+1) < 10) ? "0" + (tempDate.getMonth()+1) : (tempDate.getMonth()+1);
+    let dd = (tempDate.getDate() < 10) ? "0" + tempDate.getDate() : tempDate.getDate();
+    let today = yy + '-' + mm + '-' + dd;
 
-
-      let today = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate();
-
-      dateQuery = "WITH * WHERE a.shortdate = '" + "2018-11-01" + "'";
+      dateQuery = "WITH * WHERE a.shortdate = '" + today + "'";
     }
 
     if (source === "Random") {

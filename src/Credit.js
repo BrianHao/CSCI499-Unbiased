@@ -10,18 +10,18 @@ const Credit = () => (
 
       <AccordionItem title="Source 1">
         <p style={{ padding: '18px' }}>
-          Souce for all news articles: <a href="https://newsapi.org/" target="_blank"><button type="button" name="button">News API</button></a>
+          Souce for all news articles: <a href="https://newsapi.org/" target="_blank" rel="noopener noreferrer"><button type="button" name="button">News API</button></a>
         </p>
       </AccordionItem>
       <AccordionItem title="Source 2">
         <p style={{ padding: '18px' }}>
-          Backend database powered by: <a href="https://neo4j.com/" target="_blank"><button type="button" name="button">Neo4j</button></a>
+          Backend database powered by: <a href="https://neo4j.com/" target="_blank" rel="noopener noreferrer"><button type="button" name="button">Neo4j</button></a>
         </p>
       </AccordionItem>
 
       <AccordionItem title="Source 3">
         <p style={{ padding: '18px' }}>
-          Powered by: <a href="https://reactjs.org/" target="_blank"><button type="button" name="button">Reactjs</button></a>
+          Powered by: <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer"><button type="button" name="button">Reactjs</button></a>
         </p>
       </AccordionItem>
       <AccordionItem title="Source 4">
