@@ -2,6 +2,7 @@ import React from 'react';
 
 class About extends React.Component {
   render() {
+    console.log(process.env.REACT_APP_GRAPHENEDB_URL);
     return (
       <div>
         <h1>About</h1>

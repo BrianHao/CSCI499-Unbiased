@@ -66,13 +66,13 @@ class Home extends React.Component {
       cypherQuery = "MATCH (a:Article) WITH * WHERE a.source = '" + source + "' " + dateQuery + " RETURN a LIMIT 25";
     }
 
-    console.log(cypherQuery);
+    //console.log(cypherQuery);
 
      db.query(cypherQuery,((err, results) => {
       if (err) {
         console.error('Error querying database for articles to display:', err);
       } else {
-        console.log('Success querying database for articles to display');
+        //console.log('Success querying database for articles to display');
         this.setState({ returnedJson: results });
       }
     }));

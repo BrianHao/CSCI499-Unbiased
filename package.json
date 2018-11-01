@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "ajv": "^6.5.4",
+    "dotenv": "^6.1.0",
     "muicss": "^0.9.41",
     "neo4j": "^2.0.0-RC2",
     "neo4j-driver": "^1.7.0-rc2",
