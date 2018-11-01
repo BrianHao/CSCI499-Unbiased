@@ -3,7 +3,8 @@ import Dropdown from 'muicss/lib/react/dropdown';
 import DropdownItem from 'muicss/lib/react/dropdown-item';
 
 /* GrapheneDB Seraph Setup */
-const url = require('url').parse(process.env.REACT_APP_GRAPHENEDB_URL)
+const url = require('url').parse('https://app112056041-uEamUv:b.36q7DWRcBft0.C0QhkfsLNvmf0vfG@hobby-nohnkjlhjbaagbkedkjmmcbl.dbs.graphenedb.com:24780'
+)
 const db = require("seraph")({
   server: url.protocol + '//' + url.host,
   user: url.auth.split(':')[0],
@@ -104,7 +105,7 @@ class Home extends React.Component {
         );
       }
     }
-    
+
     return (
     	<div className="Home-Content">
 
