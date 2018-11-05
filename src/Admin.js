@@ -12,6 +12,7 @@ const db = require("seraph")({
 const NewsSources = ['the-washington-post','the-new-york-times','bbc-news', 'cnn', 'fox-news', 'abc-news', 'the-wall-street-journal', 'time'];
 
 class Admin extends React.Component {
+
 /* Gets articles from NewsAPI.org */
 getArticles (){
   //console.log("===== Operation Start =====");
@@ -138,6 +139,60 @@ for(let i =0; i<articles.length; i++) {
 
 }
 
+createRelationships(){
+  const stringSimilarity = require('string-similarity');
+  let similarity;
+  //let dbArticles = [];
+
+   var cypherQuery = 'MATCH (n:Article) RETURN n';
+   db.query(cypherQuery, function(err, res){
+     if(err){
+       console.log(err);
+     }
+     else{
+      console.log("Success");
+      console.log(res);
+      console.log(res.length);
+
+      var cypherQueryII = 'MATCH (a:Article), (b:Article) WHERE a.title = $atitle and b.title = $btitle MERGE (a)-[r:related {similar: $percentage}]-(b)';
+
+       for (let i = 0; i< res.length; i ++){
+         for(let j = 1; j< res.length; j++){
+           if(res[i].title  !== res[j].title){
+             similarity = stringSimilarity.compareTwoStrings(res[i].description,res[j].description);
+             if (similarity > 0.5){
+               db.query(cypherQueryII,{atitle: res[i].title, btitle: res[j].title, percentage: similarity}, function(err, res){
+                 if(err){
+                   console.log(err);
+
+                 }else{
+                    console.log(similarity);
+                 }
+               })
+             }
+           }
+         }
+       }
+
+     }
+   });
+
+}
+
+deleteAll(){
+ var  cypherQuery = "MATCH (n) DETACH DELETE (n)";
+
+  db.query(cypherQuery, function(err,res){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log("All nodes and relationships deleted from database");
+    }
+  })
+}
+
+
   render() {
     return (
       <div>
@@ -151,6 +206,14 @@ for(let i =0; i<articles.length; i++) {
        <li>Create a relation between each article and its posted date in the format yyyy-mm-dd</li>
        </ol>
  	  	 <button onClick={() => {this.getArticles();}}>Update Articles</button>
+       <br />
+       <br />
+       <p>Clicking the following button will relate articles to one another </p>
+       <button onClick={()=>{this.createRelationships();}}> Relate Articles </button>
+       <br />
+       <br />
+       <p>< font color = "red">  THE FOLLOWING WILL DELETE ALL NODES/RELATIONSHIPS IN DATABASE</font></p>
+       <button onClick ={ () => {this.deleteAll();}}> Delete Database </button>
       </div>
     );
   }
