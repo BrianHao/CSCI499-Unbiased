@@ -25,6 +25,12 @@ body{
 	color: #34333b;
 }
 
+#heading1 {
+	text-decoration: none;
+	font: 60px "Arial Black", Helvetica, sans-serif;
+	color: #676566;
+}
+
 #site-footer{
 	position: fixed;
 	bottom: 0;

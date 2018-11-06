@@ -4,6 +4,7 @@ import About from './About';
 import Credit from './Credit';
 import Home from './Home';
 import Admin from './Admin';
+import Related from './Related';
 
 // Main content section of website
 // Content is displayed depending on the path routed.
@@ -17,6 +18,7 @@ class App extends React.Component {
           <Route exact={true} path="/About" component={About}/>
           <Route exact={true} path="/Credit" component={Credit}/>
           <Route exact={true} path="/Admin" component={Admin}/>
+          <Route exact={true} path="/Related" component={Related}/>
         </div>
 
           <footer id="site-footer">

@@ -16,6 +16,8 @@
     "node": "8.11.4"
   },
   "dependencies": {
+    "@material-ui/core": "^3.4.0",
+    "@material-ui/icons": "^3.0.1",
     "ajv": "^6.5.4",
     "dotenv": "^6.1.0",
     "muicss": "^0.9.41",

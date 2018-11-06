@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import Dropdown from 'muicss/lib/react/dropdown';
 import DropdownItem from 'muicss/lib/react/dropdown-item';
+import Button from 'muicss/lib/react/button';
 
 /* GrapheneDB Seraph Setup */
 
@@ -13,6 +15,7 @@ const db = require("seraph")({
 
 /* Article Component */
 function Article(props) {
+
   return (
     <div className="row">
       <div className="col-xs-12">
@@ -25,10 +28,15 @@ function Article(props) {
             <div className="article-image col-sm-2">
             {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
             </div>
-            <div className="article-info col-sm-10">
+            <div className="article-info col-sm-8">
               <div>{props.ArticleDatePublished}</div>
               <div>{props.ArticleDescription}</div>
              </div>
+             <div className="article-related-btn col-sm-2">
+                <Link to={{ pathname:"/Related", state: { originalTitle: props.ArticleTitle } }}>
+                  <Button variant="raised" color="primary">View Related</Button>
+                </Link>
+            </div>
             </div>
         </div>
       </div>
