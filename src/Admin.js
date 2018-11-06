@@ -18,6 +18,7 @@ getArticles (){
   //console.log("===== Operation Start =====");
   for (let i = 0; i<NewsSources.length; i++){
     this.getArticlesFromSource('everything',NewsSources[i]);
+    this.getArticlesFromSource('top-headlines',NewsSources[i]);
   }
 }
 
@@ -159,7 +160,7 @@ createRelationships(){
        for (let i = 0; i< res.length; i ++){
          for(let j = 1; j< res.length; j++){
            if(res[i].title  !== res[j].title){
-             similarity = stringSimilarity.compareTwoStrings(res[i].title + res[i].description,res[j].title + res[j].description);
+             similarity = stringSimilarity.compareTwoStrings(res[i].title + res[i].description , res[j].title + res[j].description);
              if (similarity > 0.5){
                db.query(cypherQueryII,{atitle: res[i].title, btitle: res[j].title, percentage: similarity}, function(err, res){
                  if(err){
