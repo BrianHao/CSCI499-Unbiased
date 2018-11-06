@@ -192,6 +192,18 @@ deleteAll(){
   })
 }
 
+CleanUp(){
+  var cypherQuery = "MATCH (d:Date), (a:Article) WITH min(d) AS x  MATCH p=(a)-[r:dateposted]->(x) DETACH DELETE  a, x";
+  db.query(cypherQuery, function(err,res){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log("Oldest Articles and respective Date node removed");
+    }
+  })
+}
+
 
   render() {
     return (
@@ -212,7 +224,16 @@ deleteAll(){
        <button onClick={()=>{this.createRelationships();}}> Relate Articles </button>
        <br />
        <br />
-       <p>< font color = "red">  THE FOLLOWING WILL DELETE ALL NODES/RELATIONSHIPS IN DATABASE</font></p>
+       <p>Clicking the following button will:</p>
+       <ol>
+       <li>Delete oldest articles in our neo4j Database</li>
+       <li>Delete relationship  between  oldest articles and posted date</li>
+       <li>Delete oldest date in Database </li>
+       </ol>
+       <button onClick={()=>{this.CleanUp();}}> Clean Up </button>
+       <br />
+       <br />
+       <p>< font color = "red">  THE FOLLOWING WILL DELETE ALL NODES AND RELATIONSHIPS IN DATABASE</font></p>
        <button onClick ={ () => {this.deleteAll();}}> Delete Database </button>
       </div>
     );
