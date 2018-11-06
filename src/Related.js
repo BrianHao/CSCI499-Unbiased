@@ -27,8 +27,9 @@ function Article(props) {
             {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
             </div>
             <div className="article-info col-sm-10">
-              <div>{props.ArticleDatePublished}</div>
-              <div>{props.ArticleDescription}</div>
+              <div><b>Date: </b> {props.ArticleDatePublished}</div>
+              <div><b>Description: </b>{props.ArticleDescription}</div>
+              <div><b>Content: </b>{props.ArticleContent}</div>
              </div>
             </div>
         </div>

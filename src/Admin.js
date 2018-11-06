@@ -160,7 +160,7 @@ createRelationships(){
        for (let i = 0; i< res.length; i ++){
          for(let j = 1; j< res.length; j++){
            if(res[i].title  !== res[j].title){
-             similarity = stringSimilarity.compareTwoStrings(res[i].title + res[i].description , res[j].title + res[j].description);
+             similarity = stringSimilarity.compareTwoStrings(res[i].title + res[i].description + res[i].content, res[j].title + res[j].description + res[j].content);
              if (similarity > 0.5){
                db.query(cypherQueryII,{atitle: res[i].title, btitle: res[j].title, percentage: similarity}, function(err, res){
                  if(err){
