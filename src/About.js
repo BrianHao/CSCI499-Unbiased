@@ -11,6 +11,7 @@ class About extends React.Component {
 
             Users themselves upon seeing all the renditions of the event will determine what is right and what is wrong. Giving users a more in depth and more accurate view of the world.
         </p>
+        <h4>So if you see an article that interest you click  View Related to get your UNBIASED view</h4>
       </div>
     );
   }
