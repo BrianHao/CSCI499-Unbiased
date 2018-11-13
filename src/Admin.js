@@ -160,7 +160,7 @@ createRelationships(){
        for (let i = 0; i< res.length; i ++){
          for(let j = 1; j< res.length; j++){
            if(res[i].title  !== res[j].title){
-             similarity = stringSimilarity.compareTwoStrings(res[i].title + res[i].description + res[i].content, res[j].title + res[j].description + res[j].content);
+             similarity = stringSimilarity.compareTwoStrings(res[i].description + " " + res[i].title, res[j].description + " " + res[j].title);
              if (similarity > 0.5){
                db.query(cypherQueryII,{atitle: res[i].title, btitle: res[j].title, percentage: similarity}, function(err, res){
                  if(err){
@@ -234,8 +234,8 @@ CleanUp(){
        <button onClick={()=>{this.CleanUp();}}> Clean Up </button>
        <br />
        <br />
-       {/*<p>< font color = "red">  THE FOLLOWING WILL DELETE ALL NODES AND RELATIONSHIPS IN DATABASE</font></p>
-       <button onClick ={ () => {this.deleteAll();}}> Delete Database </button>*/}
+       <p><font color = "red">  THE FOLLOWING WILL DELETE ALL NODES AND RELATIONSHIPS IN DATABASE</font></p>
+       <button onClick ={ () => {this.deleteAll();}}> Delete Database </button>
       </div>
     );
   }

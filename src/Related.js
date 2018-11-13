@@ -65,7 +65,7 @@ class Related extends React.Component {
     }
 
     getRelatedArticles(title) {
-    let cypherQuery = "MATCH (a:Article {title: \"" + title + "\"})-[rel:related]->(b:Article) RETURN b";
+    let cypherQuery = "MATCH (a:Article {title: \"" + title + "\"})-[rel:related]->(b:Article) RETURN b LIMIT 5";
 
      db.query(cypherQuery,((err, results) => {
       if (err) {
