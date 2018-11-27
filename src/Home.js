@@ -15,27 +15,28 @@ const db = require("seraph")({
 
 /* Article Component */
 function Article(props) {
-
+  let logosource = "img/" + props.ArticleSource + ".png";
   return (
-    <div className="row">
+    <div className="row" id="article-cards">
       <div className="col-xs-12">
         <div className="panel panel-default">
           <div className="panel-heading">
-            <h3 className="panel-title">[{props.ArticleSource}] {' '}
-            <a href={props.ArticleUrl}>{props.ArticleTitle}</a></h3>
+            <h3 className="panel-title"><b>
+            <img src={logosource} alt={props.ArticleSource} id="source-img"></img> {' '}
+            <a id="article-heading" href={props.ArticleUrl}>{props.ArticleTitle}</a> 
+            </b></h3>
           </div>
           <div className="panel-body">
             <div className="article-image col-sm-2">
-            {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
+            {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image Available</center>  }
             </div>
             <div className="article-info col-sm-8">
               <div><b>Date: </b> {props.ArticleDatePublished}</div>
               <div><b>Description: </b>{props.ArticleDescription}</div>
-              <div><b>Content: </b>{props.ArticleContent}</div>
              </div>
              <div className="article-related-btn col-sm-2">
                 <Link to={{ pathname:"/Related", state: { originalTitle: props.ArticleTitle } }}>
-                  <Button variant="raised" color="primary">View Related</Button>
+                  <Button variant="raised" color="primary" size="large" >View Related</Button>
                 </Link>
             </div>
             </div>
