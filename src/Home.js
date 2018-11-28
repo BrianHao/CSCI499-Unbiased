@@ -19,10 +19,11 @@ function Article(props) {
   return (
     <div className="row" id="article-cards">
       <div className="col-xs-12">
-        <div className="panel panel-default">
+        <div className="panel panel-info">
           <div className="panel-heading">
             <h3 className="panel-title"><b>
-            <img src={logosource} alt={props.ArticleSource} id="source-img"></img> {' '}
+            <div className=" col-sm-2"><center>
+            <img src={logosource} alt={props.ArticleSource} id="source-img"></img></center></div> {' '}
             <a id="article-heading" href={props.ArticleUrl}>{props.ArticleTitle}</a> 
             </b></h3>
           </div>

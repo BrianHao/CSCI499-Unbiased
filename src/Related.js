@@ -13,15 +13,49 @@ const db = require("seraph")({
 
 /* Article Component */
 function Article(props) {
+  let logosource = "img/" + props.ArticleSource + ".png";
+  return (
+    <div className="row">
+      <div className="col-xs-12">
+        <div className="panel panel-info">
+          <div className="panel-heading">
+            <h3 className="panel-title"><b>
+            <div className=" col-sm-2"><center>
+            <img src={logosource} alt={props.ArticleSource} id="source-img"></img></center></div> {' '}
+            <a id="article-heading" href={props.ArticleUrl}>{props.ArticleTitle}</a> 
+            
+            </b></h3>
+          </div>
+          <div className="panel-body">
+            <div className="article-image col-sm-2">
+            {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
+            </div>
+            <div className="article-info col-sm-10">
+              <div><b>Date: </b> {props.ArticleDatePublished}</div>
+              <div><b>Description: </b>{props.ArticleDescription}</div>
+              <div><b>Content: </b>{props.ArticleContent}</div>
+             </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    );
+}
 
+function ArticleRelated(props) {
+  let logosource = "img/" + props.ArticleSource + ".png";
   return (
     <div className="row">
       <div className="col-xs-12">
         <div className="panel panel-default">
           <div className="panel-heading">
-            <h3 className="panel-title">[{props.ArticleSource}] {' '}
-            <a href={props.ArticleUrl}>{props.ArticleTitle}</a></h3>
-          </div>
+            <h3 className="panel-title"><b>
+            <div className=" col-sm-2"><center>
+            <img src={logosource} alt={props.ArticleSource} id="source-img"></img></center></div> {' '}
+            <a id="article-heading" href={props.ArticleUrl}>{props.ArticleTitle}</a> 
+            
+            </b></h3>
+          </div>  
           <div className="panel-body">
             <div className="article-image col-sm-2">
             {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
@@ -107,7 +141,7 @@ class Related extends React.Component {
     } else {
       for(let i = 0; i < this.state.relatedArticlesJson.length; i++) {
         relatedArticles.push(
-          <Article
+          <ArticleRelated
             //key = {this.state.returnedJson[i].title}
             ArticleSource = {this.state.relatedArticlesJson[i].source}
             ArticleTitle = {this.state.relatedArticlesJson[i].title}
@@ -141,7 +175,7 @@ class Related extends React.Component {
         <br />
         <div className="go-back-button">
                 <Link to="/">
-                  <Button variant="raised" color="primary">Back</Button>
+                  <Button variant="raised" color="primary" size="large">Back</Button>
                 </Link>
         </div>
           <br />
