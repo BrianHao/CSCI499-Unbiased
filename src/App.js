@@ -1,14 +1,33 @@
-  import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import React from 'react';
+import { Link, Route, Redirect} from 'react-router-dom';
 import About from './About';
 import Credit from './Credit';
 import Home from './Home';
 import Admin from './Admin';
 import Related from './Related';
+import Login from './Login';
+
+
+
+function PrivateRoute({ component: Component, isAdmin, ...rest }) {
+return ( <Route {...rest}
+        render={props => isAdmin ? ( <Component isAdmin={isAdmin} {...props} /> )
+      : ( <Redirect to={{ pathname: "/login", state: { from: props.location }
+        }} />
+)} />
+);
+}
 
 // Main content section of website
 // Content is displayed depending on the path routed.
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAdmin: false
+    };
+  }
+
   render() {
     return (
       <div className="webpage">
@@ -17,8 +36,9 @@ class App extends React.Component {
           <Route exact={true} path="/" component={Home}/>
           <Route exact={true} path="/About" component={About}/>
           <Route exact={true} path="/Credit" component={Credit}/>
-          <Route exact={true} path="/Admin" component={Admin}/>
+          <PrivateRoute exact={true} path="/Admin" isAdmin={this.state.isAdmin} component={Admin}/>
           <Route exact={true} path="/Related" component={Related}/>
+          <Route exact={true} path="/Login" component={Login} />
         </div>
 
           <footer id="site-footer">

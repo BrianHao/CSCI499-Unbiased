@@ -24,7 +24,7 @@ function Article(props) {
             <h3 className="panel-title"><b>
             <div className=" col-sm-2"><center>
             <img src={logosource} alt={props.ArticleSource} id="source-img"></img></center></div> {' '}
-            <a id="article-heading" href={props.ArticleUrl}>{props.ArticleTitle}</a> 
+            <a id="article-heading" href={props.ArticleUrl}>{props.ArticleTitle}</a>
             </b></h3>
           </div>
           <div className="panel-body">
@@ -73,9 +73,9 @@ class Home extends React.Component {
     }
 
     if (source === "Random") {
-      cypherQuery = "MATCH (a:Article) WITH * WHERE rand() < 0.10 " + dateQuery + " RETURN a LIMIT 25";
+      cypherQuery = "MATCH (a:Article) WITH * WHERE rand() < 0.10 " + dateQuery + " RETURN a ORDER BY  a.publishedat DESC LIMIT 25";
     } else {
-      cypherQuery = "MATCH (a:Article) WITH * WHERE a.source = '" + source + "' " + dateQuery + " RETURN a LIMIT 25";
+      cypherQuery = "MATCH (a:Article) WITH * WHERE a.source = '" + source + "' " + dateQuery + " RETURN a ORDER BY  a.publishedat DESC LIMIT 25";
     }
 
     //console.log(cypherQuery);
@@ -116,7 +116,7 @@ class Home extends React.Component {
         );
       }
     }
-    
+
     return (
     	<div className="Home-Content">
 
