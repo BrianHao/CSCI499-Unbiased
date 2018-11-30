@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Dropdown from 'muicss/lib/react/dropdown';
 import DropdownItem from 'muicss/lib/react/dropdown-item';
 import Button from 'muicss/lib/react/button';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
 /* GrapheneDB Seraph Setup */
 
@@ -120,29 +121,35 @@ class Home extends React.Component {
     return (
     	<div className="Home-Content">
 
-        <div className="navBar">
-          Displaying { }
-          <span>
-            <Dropdown color="default" label={this.state.displaySource}>
-              <DropdownItem onClick={() => { this.setState({ displaySource: "Random"}); this.getArticles("Random", this.state.displayTimeRange); }} >Random</DropdownItem>
-              <DropdownItem onClick={() => { this.setState({ displaySource: "The New York Times"}); this.getArticles("The New York Times", this.state.displayTimeRange); }} >The New York Times</DropdownItem>
-              <DropdownItem onClick={() => { this.setState({ displaySource: "BBC News"}); this.getArticles("BBC News", this.state.displayTimeRange); }} >BBC News</DropdownItem>
-              <DropdownItem onClick={() => { this.setState({ displaySource: "CNN"}); this.getArticles("CNN", this.state.displayTimeRange); }} >CNN</DropdownItem>
-              <DropdownItem onClick={() => { this.setState({ displaySource: "Fox News"}); this.getArticles("Fox News", this.state.displayTimeRange); }} >Fox News</DropdownItem>
-              <DropdownItem onClick={() => { this.setState({ displaySource: "ABC News"}); this.getArticles("ABC News", this.state.displayTimeRange); }} >ABC News</DropdownItem>
-              <DropdownItem onClick={() => { this.setState({ displaySource: "The Wall Street Journal"}); this.getArticles("The Wall Street Journal", this.state.displayTimeRange); }} >The Wall Street Journal</DropdownItem>
-              <DropdownItem onClick={() => { this.setState({ displaySource: "Time"}); this.getArticles("Time", this.state.displayTimeRange); }} >Time</DropdownItem>
-              <DropdownItem onClick={() => { this.setState({ displaySource: "The Washington Post"}); this.getArticles("The Washington Post", this.state.displayTimeRange); }} >The Washington Post</DropdownItem>
-            </Dropdown>
-          </span>
-          { } articles from { }
-          <span>
-            <Dropdown color="default" label={this.state.displayTimeRange}>
-              <DropdownItem onClick={() => { this.setState({ displayTimeRange: "Today"}); this.getArticles(this.state.displaySource, "Today"); }} >Today</DropdownItem>
-              <DropdownItem onClick={() => { this.setState({ displayTimeRange: "This Week"}); this.getArticles(this.state.displaySource, "This Week"); }} >This Week</DropdownItem>
-            </Dropdown>
-          </span>
-        </div>
+        <Navbar>
+          <Navbar.Text>
+            Displaying
+          </Navbar.Text>
+          <Nav>
+            <NavDropdown eventKey={3} title={this.state.displaySource} id="nav-news-source">
+              <MenuItem onClick={() => { this.setState({ displaySource: "Random"}); this.getArticles("Random", this.state.displayTimeRange); }} >Random</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "The New York Times"}); this.getArticles("The New York Times", this.state.displayTimeRange); }} >The New York Times</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "BBC News"}); this.getArticles("BBC News", this.state.displayTimeRange); }} >BBC News</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "CNN"}); this.getArticles("CNN", this.state.displayTimeRange); }} >CNN</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "Fox News"}); this.getArticles("Fox News", this.state.displayTimeRange); }} >Fox News</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "ABC News"}); this.getArticles("ABC News", this.state.displayTimeRange); }} >ABC News</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "The Wall Street Journal"}); this.getArticles("The Wall Street Journal", this.state.displayTimeRange); }} >The Wall Street Journal</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "Time"}); this.getArticles("Time", this.state.displayTimeRange); }} >Time</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "The Washington Post"}); this.getArticles("The Washington Post", this.state.displayTimeRange); }} >The Washington Post</MenuItem>
+            </NavDropdown>
+          </Nav>
+
+          <Navbar.Text>
+            articles from
+          </Navbar.Text>
+          <Nav>
+            <NavDropdown eventKey={3} title={this.state.displaySource} id="nav-news-source">
+              <MenuItem onClick={() => { this.setState({ displayTimeRange: "Today"}); this.getArticles(this.state.displaySource, "Today"); }} >Today</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displayTimeRange: "This Week"}); this.getArticles(this.state.displaySource, "This Week"); }} >This Week</MenuItem>
+            </NavDropdown>
+          </Nav>
+        </Navbar>
+
 
           	<div className="Articles-Display">
           	 {articlesToDisplay.length > 0 ? articlesToDisplay : <div>No Results</div>  }

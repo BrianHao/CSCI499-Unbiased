@@ -1,5 +1,6 @@
 import React from 'react';
 import Admin from './Admin';
+import { Well, PageHeader } from 'react-bootstrap';
 
 class Login extends React.Component{
   constructor(props){
@@ -34,17 +35,25 @@ class Login extends React.Component{
     }
     return(
       <div>
-      <h1>This page is for Admin use only please log in to continue </h1>
+      <PageHeader>
+      Admin Login Page
+    </PageHeader>
+      <Well>
       <br />
       <br />
-      <h2><font color="black"> LOG IN</font></h2>
+      <h2><font color="black">Please enter your administrator login credentials:</font></h2>
+      <br />
+      <br />
         <form onSubmit={this.login}>
           <label>
-              PASSWORD
+              Password: {' '}
               <input type="password" value={this.state.password} onChange={this.getPassword} />
           </label>
-            <input type="submit" value="SUMBIT" />
+            {' '}<input type="submit" value="SUMBIT" />
         </form>
+        <br />
+      <br />
+        </Well>
       </div>
     )
   }

@@ -79,11 +79,11 @@ body{
 
 #article-heading {
 	display:inline-block;
-	width: 70%;
+	width: 80%;
 }
 
 #source-img {
-	max-height: 28px;
+	max-height: 30px;
 	display:inline-block;
 }
 

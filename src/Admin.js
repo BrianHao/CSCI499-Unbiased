@@ -1,4 +1,5 @@
 import React from 'react';
+import { Well, PageHeader } from 'react-bootstrap';
 
 /* GrapheneDB Seraph Setup */
 
@@ -209,9 +210,11 @@ CleanUp(){
   render() {
     return (
       <div>
- 	  	 <h2><font color="red">Admin Page</font></h2>
-       <p><font color="red">This page will be made locked behind a login for admin access after production release.</font></p>
- 	  	 <h3>NewsAPI.org -> Unbiased neo4j Database</h3>
+ 	  	 <PageHeader>
+        <font color="red">Admin Page</font>
+        </PageHeader>
+       <Well>
+ 	  	 <h2>Update Articles from NewsAPI</h2>
        <p>Clicking the following button will:</p>
        <ol>
        <li>Pull news articles from NewsAPI.org and store them in our neo4j Database</li>
@@ -219,12 +222,14 @@ CleanUp(){
        <li>Create a relation between each article and its posted date in the format yyyy-mm-dd</li>
        </ol>
  	  	 <button onClick={() => {this.getArticles();}}>Update Articles</button>
-       <br />
-       <br />
+       </Well>
+       <Well>
+       <h2>Relate Articles in Neo4j</h2>
        <p>Clicking the following button will relate articles to one another </p>
        <button onClick={()=>{this.createRelationships();}}> Relate Articles </button>
-       <br />
-       <br />
+       </Well>
+       <Well>
+       <h2>Clean Up Articles in Neo4j</h2>
        <p>Clicking the following button will:</p>
        <ol>
        <li>Delete oldest articles in our neo4j Database</li>
@@ -232,10 +237,22 @@ CleanUp(){
        <li>Delete oldest date in Database </li>
        </ol>
        <button onClick={()=>{this.CleanUp();}}> Clean Up </button>
-       <br />
-       <br />
+       </Well>
+       <Well>
+       <h2><font color = "red"> Clear Database</font></h2>
        <p><font color = "red">  THE FOLLOWING WILL DELETE ALL NODES AND RELATIONSHIPS IN DATABASE</font></p>
-       <button onClick ={ () => {this.deleteAll();}}> Delete Database </button>
+       <button onClick ={ () => {this.deleteAll();}}> <font color = "red"> Delete Database </font></button>
+      </Well>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
       </div>
     );
   }

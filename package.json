@@ -25,6 +25,7 @@
     "neo4j-driver": "^1.7.2",
     "newsapi": "^2.4.0",
     "react": "^16.6.3",
+    "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
     "react-light-accordion": "^0.1.4",
     "react-router-dom": "^4.3.1",
