@@ -1,9 +1,11 @@
+// This is our modifications to the string-similarity library
+
 module.exports = {
 	compareTwoStrings,
 	findBestMatch
 };
 
-function compareTwoStrings2 (str1, str2) {
+function compareTwoStrings (str1, str2) {
 	if (!str1.length && !str2.length) return 1;                    // if both are empty strings
 	if (!str1.length || !str2.length) return 0;                    // if only one is empty string
 	if (str1.toUpperCase() === str2.toUpperCase()) return 1;       // identical
