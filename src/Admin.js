@@ -166,7 +166,6 @@ createRelationships(){
                db.query(cypherQueryII,{atitle: res[i].title, btitle: res[j].title, percentage: similarity}, function(err, res){
                  if(err){
                    console.log(err);
-
                  }else{
                     console.log(similarity);
                  }

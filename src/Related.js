@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import Button from 'muicss/lib/react/button';
+import { PageHeader } from 'react-bootstrap';
 
 /* GrapheneDB Seraph Setup */
 
@@ -159,13 +160,17 @@ class Related extends React.Component {
 
     return (
       <div>
-      Selected Article:
+      <PageHeader>
+        <small>Selected Article:</small>
+      </PageHeader>
         <div className="selected-article">
           {thisArticle.length > 0 ? thisArticle : <div>Error displaying selected article</div>  }
         </div>
 
         <div id="heading1">
-        Related Articles:
+        <PageHeader>
+          <small>Related Articles:</small>
+      </PageHeader>
         </div>
 
         <div className="related-articles">
