@@ -143,7 +143,7 @@ class Home extends React.Component {
             articles from
           </Navbar.Text>
           <Nav>
-            <NavDropdown eventKey={3} title={this.state.displaySource} id="nav-news-source">
+            <NavDropdown eventKey={3} title={this.state.displayTimeRange} id="nav-news-source">
               <MenuItem onClick={() => { this.setState({ displayTimeRange: "Today"}); this.getArticles(this.state.displaySource, "Today"); }} >Today</MenuItem>
               <MenuItem onClick={() => { this.setState({ displayTimeRange: "This Week"}); this.getArticles(this.state.displaySource, "This Week"); }} >This Week</MenuItem>
             </NavDropdown>
