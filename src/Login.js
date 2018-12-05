@@ -35,9 +35,7 @@ class Login extends React.Component{
     }
     return(
       <div>
-      <PageHeader>
-      Admin Login Page
-    </PageHeader>
+      w
       <Well>
       <br />
       <br />

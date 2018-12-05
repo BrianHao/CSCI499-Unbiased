@@ -21,17 +21,17 @@ function Article(props) {
         <div className="panel panel-info">
           <div className="panel-heading">
             <h3 className="panel-title"><b>
-            <div className=" col-sm-2"><center>
+            <div className=" col-md-2"><center>
             <img src={logosource} alt={props.ArticleSource} id="source-img"></img></center></div> {' '}
             <a id="article-heading" href={props.ArticleUrl}>{props.ArticleTitle}</a> 
             
             </b></h3>
           </div>
           <div className="panel-body">
-            <div className="article-image col-sm-2">
-            {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
+            <div className="article-image col-md-2">
+            {props.ArticleImageUrl !== 'N/A' ? <center><img src={props.ArticleImageUrl} alt="" className="img-responsive"></img></center> : <center>No Image</center>  }
             </div>
-            <div className="article-info col-sm-10">
+            <div className="article-info col-md-10">
               <div><b>Date: </b> {props.ArticleDatePublished}</div>
               <div><b>Description: </b>{props.ArticleDescription}</div>
               <div><b>Content: </b>{props.ArticleContent}</div>
@@ -51,7 +51,7 @@ function ArticleRelated(props) {
         <div className="panel panel-default">
           <div className="panel-heading">
             <h3 className="panel-title"><b>
-            <div className=" col-sm-2"><center>
+            <div className=" col-md-2"><center>
             <img src={logosource} alt={props.ArticleSource} id="source-img"></img></center></div> {' '}
             <a id="article-heading" href={props.ArticleUrl}>{props.ArticleTitle}</a> 
             
@@ -59,9 +59,9 @@ function ArticleRelated(props) {
           </div>  
           <div className="panel-body">
             <div className="article-image col-sm-2">
-            {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image</center>  }
+            {props.ArticleImageUrl !== 'N/A' ? <center><img src={props.ArticleImageUrl} alt="" className="img-responsive"></img></center> : <center>No Image</center>  }
             </div>
-            <div className="article-info col-sm-10">
+            <div className="article-info col-md-10">
               <div><b>Date: </b> {props.ArticleDatePublished}</div>
               <div><b>Description: </b>{props.ArticleDescription}</div>
               <div><b>Content: </b>{props.ArticleContent}</div>

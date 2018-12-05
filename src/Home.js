@@ -23,22 +23,22 @@ function Article(props) {
         <div className="panel panel-info">
           <div className="panel-heading">
             <h3 className="panel-title"><b>
-            <div className=" col-sm-2"><center>
+            <div className=" col-md-2"><center>
             <img src={logosource} alt={props.ArticleSource} id="source-img"></img></center></div> {' '}
             <a id="article-heading" href={props.ArticleUrl}>{props.ArticleTitle}</a>
             </b></h3>
           </div>
           <div className="panel-body">
-            <div className="article-image col-sm-2">
-            {props.ArticleImageUrl !== 'N/A' ? <img src={props.ArticleImageUrl} alt="" className="img-responsive"></img> : <center>No Image Available</center>  }
+            <div className="article-image col-md-2">
+            {props.ArticleImageUrl !== 'N/A' ? <center><img id="article-image" src={props.ArticleImageUrl} alt="" className="img-responsive"></img></center> : <center>No Image Available</center>  }
             </div>
-            <div className="article-info col-sm-8">
+            <div className="article-info col-md-8">
               <div><b>Date: </b> {props.ArticleDatePublished}</div>
               <div><b>Description: </b>{props.ArticleDescription}</div>
              </div>
-             <div className="article-related-btn col-sm-2">
+             <div className="article-related-btn col-md-2">
                 <Link to={{ pathname:"/Related", state: { originalTitle: props.ArticleTitle } }}>
-                  <Button variant="raised" color="primary" size="large" >View Related</Button>
+                  <center><Button variant="raised" color="primary" size="large" >View Related</Button></center>
                 </Link>
             </div>
             </div>
@@ -122,9 +122,9 @@ class Home extends React.Component {
     	<div className="Home-Content">
 
         <Navbar>
-          <Navbar.Text>
+          <Navbar.Brand>
             Displaying
-          </Navbar.Text>
+          </Navbar.Brand>
           <Nav>
             <NavDropdown eventKey={3} title={this.state.displaySource} id="nav-news-source">
               <MenuItem onClick={() => { this.setState({ displaySource: "Random"}); this.getArticles("Random", this.state.displayTimeRange); }} >Random</MenuItem>
@@ -139,9 +139,9 @@ class Home extends React.Component {
             </NavDropdown>
           </Nav>
 
-          <Navbar.Text>
+          <Navbar.Brand>
             articles from
-          </Navbar.Text>
+          </Navbar.Brand>
           <Nav>
             <NavDropdown eventKey={3} title={this.state.displayTimeRange} id="nav-news-source">
               <MenuItem onClick={() => { this.setState({ displayTimeRange: "Today"}); this.getArticles(this.state.displaySource, "Today"); }} >Today</MenuItem>
