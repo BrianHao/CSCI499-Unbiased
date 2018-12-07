@@ -126,7 +126,7 @@ class Home extends React.Component {
             Displaying
           </Navbar.Brand>
           <Nav>
-            <NavDropdown eventKey={3} title={this.state.displaySource} id="nav-news-source">
+            <NavDropdown title={this.state.displaySource} id="nav-news-source">
               <MenuItem onClick={() => { this.setState({ displaySource: "Random"}); this.getArticles("Random", this.state.displayTimeRange); }} >Random</MenuItem>
               <MenuItem onClick={() => { this.setState({ displaySource: "The New York Times"}); this.getArticles("The New York Times", this.state.displayTimeRange); }} >The New York Times</MenuItem>
               <MenuItem onClick={() => { this.setState({ displaySource: "BBC News"}); this.getArticles("BBC News", this.state.displayTimeRange); }} >BBC News</MenuItem>
@@ -143,7 +143,7 @@ class Home extends React.Component {
             articles from
           </Navbar.Brand>
           <Nav>
-            <NavDropdown eventKey={3} title={this.state.displayTimeRange} id="nav-news-source">
+            <NavDropdown title={this.state.displayTimeRange} id="nav-news-source">
               <MenuItem onClick={() => { this.setState({ displayTimeRange: "Today"}); this.getArticles(this.state.displaySource, "Today"); }} >Today</MenuItem>
               <MenuItem onClick={() => { this.setState({ displayTimeRange: "This Week"}); this.getArticles(this.state.displaySource, "This Week"); }} >This Week</MenuItem>
             </NavDropdown>

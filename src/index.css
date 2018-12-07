@@ -85,7 +85,7 @@ body{
 
 #source-img {
 	max-height: 30px;
-	display:inline-block;
+	margin-left: -10px;
 }
 
 a {

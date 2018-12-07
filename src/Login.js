@@ -35,7 +35,6 @@ class Login extends React.Component{
     }
     return(
       <div>
-      w
       <Well>
       <br />
       <br />

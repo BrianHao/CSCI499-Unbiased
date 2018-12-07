@@ -6,8 +6,7 @@ import Home from './Home';
 import Admin from './Admin';
 import Related from './Related';
 import Login from './Login';
-
-
+import Test from './Test';
 
 function PrivateRoute({ component: Component, isAdmin, ...rest }) {
 return ( <Route {...rest}
@@ -39,6 +38,7 @@ class App extends React.Component {
           <PrivateRoute exact={true} path="/Admin" isAdmin={this.state.isAdmin} component={Admin}/>
           <Route exact={true} path="/Related" component={Related}/>
           <Route exact={true} path="/Login" component={Login} />
+          <Route exact={true} path="/Test" component={Test} />
         </div>
 
           <footer id="site-footer">
