@@ -13,13 +13,17 @@ const Credit = () => (
 
     <Tabs defaultActiveKey={1} id="credits">
       <Tab eventKey={1} title="NewsAPI.org">
-        Souce for all news articles: <a href="https://newsapi.org/" target="_blank" rel="noopener noreferrer"><button type="button" name="button">News API</button></a>
+        Source for all news articles: {" "}
+        <a href="https://newsapi.org/" target="_blank" rel="noopener noreferrer"><img src="img/newsapi.jpg" alt="NewsAPI logo"/></a>
+
       </Tab>
       <Tab eventKey={2} title="Neo4j">
-        Souce for all news articles: <a href="https://newsapi.org/" target="_blank" rel="noopener noreferrer"><button type="button" name="button">News API</button></a>
+         Powered by: {" "}
+         <a href="https://neo4j.com" target="_blank" rel="noopener noreferrer"><img src="img/neo4j.png" alt="Neo4j logo" /></a>
       </Tab>
       <Tab eventKey={3} title="ReactJS">
-        Powered by: <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer"><button type="button" name="button">Reactjs</button></a>
+        Powered by: {" "}
+        <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer"><img src="img/reactjs.png" alt="ReactJS logo"/></a>
       </Tab>
     </Tabs>
     </Well>
