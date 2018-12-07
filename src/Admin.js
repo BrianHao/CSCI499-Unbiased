@@ -65,7 +65,7 @@ db.query(
 
 //Add news articles to the database
 for(let i =0; i<articles.length; i++) {
-  console.log("Neo4j: Attempting to store article #" + i + " of " + articles.length);
+  //console.log("Neo4j: Attempting to store article #" + i+1 + " of " + articles.length);
 
   cypherQuery = "MERGE (a:Article {title: {title}, author: {author}, description: {description}, "
                   + "url: {url}, urltoimage: {urltoimage}, publishedat: {publishedat}, shortdate: {shortdate}, content: {content}, source: {source}})";
@@ -86,7 +86,7 @@ for(let i =0; i<articles.length; i++) {
       console.error('Error saving new node to database:', err);
     } else {
       //var result = results[0];
-      console.log("Neo4j: Successfully stored article #" + i + " of " + articles.length);
+      console.log("Neo4j: Successfully stored article #" + (i+1) + " of " + articles.length);
       //console.log('Node saved to database with id:', result.id);
     }
   });
@@ -102,7 +102,7 @@ for(let i =0; i<articles.length; i++) {
       console.error('Error saving new node to database:', err);
     } else {
       //var result = results[0];
-      console.log("Neo4j: Successfully matched article #" + i + " of " + articles.length + " to " + articles[i].source.name);
+      console.log("Neo4j: Successfully matched article #" + (i+1) + " of " + articles.length + " to " + articles[i].source.name);
       //console.log('Node saved to database with id:', result.id);
     }
   });
@@ -132,7 +132,7 @@ for(let i =0; i<articles.length; i++) {
       console.error('Error saving new node to database:', err);
     } else {
       //var result = results[0];
-      console.log("Neo4j: Successfully matched article #" + i + " of " + articles.length + " to " + articles[i].publishedAt.substring(0, 10));
+      console.log("Neo4j: Successfully matched article #" + (i+1) + " of " + articles.length + " to " + articles[i].publishedAt.substring(0, 10));
       //console.log('Node saved to database with id:', result.id);
     }
   });
@@ -152,9 +152,7 @@ createRelationships(){
        console.log(err);
      }
      else{
-      console.log("Success");
-      console.log(res);
-      console.log(res.length);
+      console.log("Success retrieving all " + res.length + "articles");
 
       var cypherQueryII = 'MATCH (a:Article), (b:Article) WHERE a.title = $atitle and b.title = $btitle MERGE (a)-[r:related {similar: $percentage}]-(b)';
 
