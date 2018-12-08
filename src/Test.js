@@ -1,7 +1,7 @@
 import React from 'react';
 import { Well } from 'react-bootstrap';
 import { Form, Input, Button, Textarea, Panel } from 'muicss/react';
-import Compare from './Compare';
+import {compareTwoStrings} from './ComparisonFunction';
 
 class Test extends React.Component{
   constructor(props){
@@ -32,10 +32,10 @@ class Test extends React.Component{
 
     // Default String similarity
     var stringSimilarity = require('string-similarity');
-    this.setState({ defaultStringSimilarity: stringSimilarity.compareTwoStrings(s1, s2) });  
- 
+    this.setState({ defaultStringSimilarity: stringSimilarity.compareTwoStrings(s1, s2) });
+
     // Our Custom String similarity
-    this.setState({ customStringSimilarity: Compare.compareTwoStrings(s1, s2) });
+    this.setState({ customStringSimilarity: compareTwoStrings(s1, s2) });
   }
 
   render(){
