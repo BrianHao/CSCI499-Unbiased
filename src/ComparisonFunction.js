@@ -11,7 +11,7 @@ import {ngrams} from './nGrams';
 export function compareTwoStrings(string1, string2){
 
     //preliminary string checks
-    if(!string1.length && !string2.length) return 1; // both are empty strings
+    if(!string1.length && !string2.length) return 0; // both are empty strings
     if(!string1.length || !string2.length) return 0; // one is an empty string;
     if(string1.toUpperCase() === string2.toUpperCase()) return 1; // same string
 
@@ -19,11 +19,11 @@ export function compareTwoStrings(string1, string2){
     let sentence1 = removeSpecialChar(string1);
     sentence1 = removeCommonWords(sentence1);
     sentence1 = stemSentence(sentence1);
-    sentence1 = ngrams(sentence1, 1);
+    //sentence1 = ngrams(sentence1, 1);
     let sentence2 = removeSpecialChar(string2);
     sentence2 = removeCommonWords(sentence2);
     sentence2 = stemSentence(sentence2);
-    sentence2 = ngrams(sentence2, 1);
+    //sentence2 = ngrams(sentence2, 1);
 
     //comparison functionality begins here
     const sample1 = sentence1.toUpperCase().split(' '); //each element in array will be compared against all elements in sample2
@@ -40,7 +40,6 @@ export function compareTwoStrings(string1, string2){
         break;
       }
     });
-
     return intersection * 2 / union;
 }
 

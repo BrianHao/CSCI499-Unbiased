@@ -71,7 +71,7 @@ var stemmer = (function(){
 		if (w.length < 3) { return w; }
 
 		firstch = w.substr(0,1);
-		if (firstch == "y") {
+		if (firstch === "y") {
 			w = firstch.toUpperCase() + w.substr(1);
 		}
 
@@ -181,7 +181,7 @@ var stemmer = (function(){
 
 		// and turn initial Y back to y
 
-		if (firstch == "y") {
+		if (firstch === "y") {
 			w = firstch.toLowerCase() + w.substr(1);
 		}
 

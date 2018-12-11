@@ -1,6 +1,5 @@
 import React from 'react';
 import { Well, PageHeader, Tabs, Tab } from 'react-bootstrap';
-import { Accordion, AccordionItem } from 'react-light-accordion';
 import 'react-light-accordion/demo/css/index.css';
 
 const Credit = () => (

@@ -1,3 +1,7 @@
+import {removeCommonWords} from './RemoveCommonWords';
+import {removeSpecialChar} from './RemoveSpecialChar';
+import {stemSentence} from './Stemmer';
+
 export function atLeastOneMatch(string1, string2){
 
     //preliminary string checks
@@ -23,7 +27,7 @@ export function atLeastOneMatch(string1, string2){
     sample1.forEach(sampleWord1 => {
       for(let i = 0, sampleWord2; sampleWord2 = sample2[i]; i++){
         if(sampleWord1 !== sampleWord2) continue;
-				match = true;
+			match = true;
         break;
       }
     });

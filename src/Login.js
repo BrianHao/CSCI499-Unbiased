@@ -1,6 +1,6 @@
 import React from 'react';
 import Admin from './Admin';
-import { Well, PageHeader } from 'react-bootstrap';
+import { Well } from 'react-bootstrap';
 
 class Login extends React.Component{
   constructor(props){

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Well, PageHeader } from 'react-bootstrap';
+import {compareTwoStrings} from './ComparisonFunction';
+import {atLeastOneMatch} from './AtLeastOneMatch';
 
 /* GrapheneDB Seraph Setup */
 
@@ -142,7 +144,7 @@ for(let i =0; i<articles.length; i++) {
 }
 
 createRelationships(){
-  const stringSimilarity = require('string-similarity');
+  //const stringSimilarity = require('string-similarity');
   let similarity;
   //let dbArticles = [];
 
@@ -159,8 +161,8 @@ createRelationships(){
        for (let i = 0; i< res.length; i ++){
          for(let j = 1; j< res.length; j++){
            if(res[i].title  !== res[j].title){
-             similarity = stringSimilarity.compareTwoStrings(res[i].description + " " + res[i].title, res[j].description + " " + res[j].title);
-             if (similarity > 0.5){
+             similarity = compareTwoStrings(res[i].description + " " + res[i].title, res[j].description + " " + res[j].title);
+             if (similarity > 0.2 && atLeastOneMatch(res[i].title, res[j].title)){
                db.query(cypherQueryII,{atitle: res[i].title, btitle: res[j].title, percentage: similarity}, function(err, res){
                  if(err){
                    console.log(err);
@@ -172,7 +174,7 @@ createRelationships(){
            }
          }
        }
-
+       console.log("Done matching")
      }
    });
 

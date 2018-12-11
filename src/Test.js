@@ -1,6 +1,6 @@
 import React from 'react';
 import { Well } from 'react-bootstrap';
-import { Form, Input, Button, Textarea, Panel } from 'muicss/react';
+import { Form, Button, Textarea, Panel } from 'muicss/react';
 import {compareTwoStrings} from './ComparisonFunction';
 
 class Test extends React.Component{

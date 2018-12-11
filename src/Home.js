@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import Dropdown from 'muicss/lib/react/dropdown';
-import DropdownItem from 'muicss/lib/react/dropdown-item';
 import Button from 'muicss/lib/react/button';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 
 /* GrapheneDB Seraph Setup */
 
