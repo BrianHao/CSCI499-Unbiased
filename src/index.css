@@ -14,18 +14,18 @@ body{
 
 #site-header a{
 	text-decoration: none;
-	font: 500% "Arial Black", Helvetica, sans-serif;
+	font: 400% "Arial Black", Helvetica, sans-serif;
 	letter-spacing: -8px;
-	color: #676566;
+	color: #34333b;
 	margin-left: 10px;
 }
 
 #site-header a:visited{
-	color: #676566;
+	color: #34333b;
 }
 
 #site-header span{
-	color: #34333b;
+	color: #ef3e34;
 }
 
 #content-margin-s{
