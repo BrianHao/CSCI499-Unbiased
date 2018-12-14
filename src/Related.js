@@ -18,7 +18,7 @@ function Article(props) {
   return (
     <div className="row">
       <div className="col-xs-12">
-        <div className="panel panel-info">
+        <div className="panel panel-info" id="shadow">
           <div className="panel-heading">
             <h3 className="panel-title"><b>
             <div className=" col-md-2"><center>
@@ -48,7 +48,7 @@ function ArticleRelated(props) {
   return (
     <div className="row">
       <div className="col-xs-12">
-        <div className="panel panel-default">
+        <div className="panel panel-default" id="shadow">
           <div className="panel-heading">
             <h3 className="panel-title"><b>
             <div className=" col-md-2"><center>

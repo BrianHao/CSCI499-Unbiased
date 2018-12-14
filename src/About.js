@@ -6,16 +6,18 @@ class About extends React.Component {
     return (
       <div>
         <PageHeader>
-          About
+          About Unbiased <br /> <small>CUNY Hunter College CSCI-499 Capstone Project</small>
         </PageHeader>
       <Well>
-        <h2>CUNY Hunter College CSCI-499 Capstone Project</h2>
-        <h3>Unbiased Web App</h3>
-        <p>All news outlets have their own take on worldwide events, their own biases tawords these events."UNBIASED" attemps to lessen the biases by compiling all major news post of a certain event/topic.
-
-            Users themselves upon seeing all the renditions of the event will determine what is right and what is wrong. Giving users a more in depth and more accurate view of the world.
-
-            So if you see an article that interests you click 'View Related' to get your UNBIASED view.
+        <h4>Our Team (Alphabetical Order):</h4>
+        <ul>
+        <li>Brian Hao</li>
+        <li>Erica Hendricks-Elliston</li>
+        <li>Phillip Foo</li>
+        <li>Ricky Chan</li>
+        </ul>
+        <p>
+          We created Unbiased to be a simple, minimalistic, and easy to use one-stop news aggregation web-app that displays articles from various top news sources. The goal is to allow users to view coverage of an event from multiple sources to provide to them a well-rounded and unbiased outlook that is not possible by just visiting any one singular source.
         </p>
       </Well>
       </div>

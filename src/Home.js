@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import Button from 'muicss/lib/react/button';
-import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
 
 /* GrapheneDB Seraph Setup */
 
@@ -18,7 +18,7 @@ function Article(props) {
   return (
     <div className="row" id="article-cards">
       <div className="col-xs-12">
-        <div className="panel panel-info">
+        <div className="panel panel-info" id="shadow">
           <div className="panel-heading">
             <h3 className="panel-title"><b>
             <div className=" col-md-2"><center>
@@ -118,7 +118,6 @@ class Home extends React.Component {
 
     return (
     	<div className="Home-Content">
-
         <Navbar>
           <Navbar.Brand>
             Displaying
@@ -147,7 +146,6 @@ class Home extends React.Component {
             </NavDropdown>
           </Nav>
         </Navbar>
-
 
           	<div className="Articles-Display">
           	 {articlesToDisplay.length > 0 ? articlesToDisplay : <div>No Results</div>  }
