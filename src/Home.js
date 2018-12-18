@@ -72,7 +72,7 @@ class Home extends React.Component {
     }
 
     if (source === "Random") {
-      cypherQuery = "MATCH (a:Article) WITH * WHERE rand() < 0.10 " + dateQuery + " RETURN a ORDER BY  a.publishedat DESC LIMIT 25";
+      cypherQuery = "MATCH (a:Article) WITH * WHERE rand() < 0.10 " + dateQuery + " RETURN a LIMIT 25";
     } else {
       cypherQuery = "MATCH (a:Article) WITH * WHERE a.source = '" + source + "' " + dateQuery + " RETURN a ORDER BY  a.publishedat DESC LIMIT 25";
     }
@@ -100,25 +100,28 @@ class Home extends React.Component {
       }
     } else {
       for(let i = 0; i < this.state.returnedJson.length; i++) {
-        articlesToDisplay.push(
-          <Article
-            //key = {this.state.returnedJson[i].title}
-            ArticleSource = {this.state.returnedJson[i].source}
-            ArticleTitle = {this.state.returnedJson[i].title}
-            ArticleAuthor = {this.state.returnedJson[i].author}
-            ArticleDescription = {this.state.returnedJson[i].description}
-            ArticleUrl = {this.state.returnedJson[i].url}
-            ArticleImageUrl = {this.state.returnedJson[i].urltoimage}
-            ArticleDatePublished = {this.state.returnedJson[i].publishedat}
-            ArticleContent = {this.state.returnedJson[i].content}
-          />
-        );
+        let title = this.state.returnedJson[i].title;
+        if (title[0].match("^[A-z]+$")){
+          articlesToDisplay.push(
+            <Article
+              //key = {this.state.returnedJson[i].title}
+              ArticleSource = {this.state.returnedJson[i].source}
+              ArticleTitle = {this.state.returnedJson[i].title}
+              ArticleAuthor = {this.state.returnedJson[i].author}
+              ArticleDescription = {this.state.returnedJson[i].description}
+              ArticleUrl = {this.state.returnedJson[i].url}
+              ArticleImageUrl = {this.state.returnedJson[i].urltoimage}
+              ArticleDatePublished = {this.state.returnedJson[i].publishedat}
+              ArticleContent = {this.state.returnedJson[i].content}
+            />
+          );
+        }
       }
     }
 
     return (
     	<div className="Home-Content">
-        <Navbar>
+        <Navbar id="shadow">
           <Navbar.Brand>
             Displaying
           </Navbar.Brand>
