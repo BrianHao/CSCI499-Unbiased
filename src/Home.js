@@ -128,14 +128,13 @@ class Home extends React.Component {
           <Nav>
             <NavDropdown title={this.state.displaySource} id="nav-news-source">
               <MenuItem onClick={() => { this.setState({ displaySource: "Random"}); this.getArticles("Random", this.state.displayTimeRange); }} >Random</MenuItem>
-              <MenuItem onClick={() => { this.setState({ displaySource: "The New York Times"}); this.getArticles("The New York Times", this.state.displayTimeRange); }} >The New York Times</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "ABC News"}); this.getArticles("ABC News", this.state.displayTimeRange); }} >ABC News</MenuItem>
               <MenuItem onClick={() => { this.setState({ displaySource: "BBC News"}); this.getArticles("BBC News", this.state.displayTimeRange); }} >BBC News</MenuItem>
               <MenuItem onClick={() => { this.setState({ displaySource: "CNN"}); this.getArticles("CNN", this.state.displayTimeRange); }} >CNN</MenuItem>
               <MenuItem onClick={() => { this.setState({ displaySource: "Fox News"}); this.getArticles("Fox News", this.state.displayTimeRange); }} >Fox News</MenuItem>
-              <MenuItem onClick={() => { this.setState({ displaySource: "ABC News"}); this.getArticles("ABC News", this.state.displayTimeRange); }} >ABC News</MenuItem>
               <MenuItem onClick={() => { this.setState({ displaySource: "The Wall Street Journal"}); this.getArticles("The Wall Street Journal", this.state.displayTimeRange); }} >The Wall Street Journal</MenuItem>
-              <MenuItem onClick={() => { this.setState({ displaySource: "Time"}); this.getArticles("Time", this.state.displayTimeRange); }} >Time</MenuItem>
               <MenuItem onClick={() => { this.setState({ displaySource: "The Washington Post"}); this.getArticles("The Washington Post", this.state.displayTimeRange); }} >The Washington Post</MenuItem>
+              <MenuItem onClick={() => { this.setState({ displaySource: "Time"}); this.getArticles("Time", this.state.displayTimeRange); }} >Time</MenuItem>
             </NavDropdown>
           </Nav>
 
