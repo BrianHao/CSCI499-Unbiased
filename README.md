@@ -18,3 +18,7 @@ Brian Hao
 ## Project Details
 
 Please view the documents folder for more information.
+
+## Instructions 
+
+Please view the documents folder for more information.
