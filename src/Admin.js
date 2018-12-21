@@ -31,7 +31,7 @@ getArticlesFromSource (queryType, querySource){
   const fetch = require('node-fetch');
   let url ='https://newsapi.org/v2/' + queryType +
           '?sources=' + querySource +
-          '&from=2018-12-18&to=2018-12-18' +
+          //'&from=2018-12-18&to=2018-12-18' +
           '&apiKey=83bab780be42486da3fe5870a46dfdba';
 
   fetch(url)
