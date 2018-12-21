@@ -17,8 +17,8 @@ Brian Hao
 
 ## Project Details
 
-Please view the documents folder for more information.
+We designed Unbiased, an easy to use one-stop news aggregation web-app that displays articles from various US journalistic sources in a minimalistic interface. For any story, we provide the user with access to all its related articles.
 
 ## Instructions 
 
-Please view the documents folder for more information.
+Please view the documents folder for installation information.
